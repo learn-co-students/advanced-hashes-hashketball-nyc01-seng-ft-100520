@@ -1,3 +1,4 @@
+require 'pry'
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +128,97 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(name)
+  game_hash.each do |location, team_info_hash|
+    team_info_hash[:players].find do |player_hash|
+      if player_hash[:player_name].include? (name)
+        return player_hash[:points]
+      end
+    end
+  end
+end
+
+
+def shoe_size(name)
+  game_hash.each do |location, team_info_hash|
+    team_info_hash[:players].each do |player_hash|
+      if player_hash[:player_name] == name
+        return player_hash[:shoe]
+      end
+    end
+  end
+end
+
+
+def team_colors(team)
+  game_hash.each do |location, team_info_hash|
+    if team_info_hash[:team_name] == team 
+      return team_info_hash[:colors]
+      
+    end
+  end
+end
+
+
+def team_names
+  name_array = []
+  game_hash.each do |location, team_info_hash|
+    name_array << team_info_hash[:team_name]
+  end
+  return name_array
+end
+
+def player_numbers(team)
+  jersey_numbers = []
+  game_hash.each do |location, team_info_hash|
+    if team_info_hash[:team_name] == team
+    team_info_hash[:players].each do |player_hash|
+      jersey_numbers << player_hash[:number]
+    end
+    end
+  end
+  return jersey_numbers
+end
+
+def player_stats(name)
+  game_hash.each do |location, team_info_hash|
+    team_info_hash[:players].each do |player_hash|
+      if player_hash[:player_name] == name 
+        return player_hash
+      end
+    end
+  end
+end
+
+# def biggest_shoe_size
+#   max_shoe_size = 0
+#   game_hash.each do |location, team_info_hash|
+#     team_info_hash[:players].each do |player_hash|
+#       if player_hash[:shoe] > biggest_shoe_size
+#         binding.pry
+#         max_shoe_size = player_hash[:shoe]
+        
+#   end
+# end
+# end
+# end
+
+
+def big_shoe_rebounds
+  max_shoe_size = 0
+  game_hash.each do |location, team_info_hash|
+    team_info_hash[:players].each do |player_hash|
+      if player_hash[:shoe] > max_shoe_size
+        max_shoe_size = player_hash[:shoe]
+  end
+end
+end
+  game_hash.each do |location, team_info_hash|
+    team_info_hash[:players].each do |player_hash|
+      if player_hash[:shoe] == max_shoe_size
+        return player_hash[:rebounds]
+      end
+    end
+  end
+end
