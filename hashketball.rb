@@ -150,15 +150,14 @@ end
 
 
 def team_colors(team_name)
-  game_hash
-  
-  colors = game_hash.each_with_object do |(home_or_away, team_hash), temp_hash|
-    binding.pry
-    if team_name == game_hash[home_or_away][:team_name]
-      team_hash[home_or_away][:colors]
+ team_colors = []
+ 
+ game_hash.each do |home_or_away, team_hash|
+    if team_hash[:team_name] == team_name
+      team_colors = team_hash[:colors]
     end
   end
-  colors
+team_colors
 end
 
 
