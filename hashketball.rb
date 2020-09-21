@@ -1,4 +1,5 @@
-# Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +127,65 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name)
+  game_hash.each do |home_or_away, team_hash|
+    team_hash[:players].each do |player_index, player_hash|
+      if player_hash[:player_name] == player_name
+        return player_hash[:points]
+      end
+    end
+  end
+end
+
+
+def shoe_size(player_name)
+  game_hash
+  
+  
+end
+
+
+def team_colors(team_name)
+  game_hash
+  
+  colors = game_hash.each_with_object do |(home_or_away, team_hash), temp_hash|
+    binding.pry
+    if team_name == game_hash[home_or_away][:team_name]
+      team_hash[home_or_away][:colors]
+    end
+  end
+  colors
+end
+
+
+def team_names()
+end
+
+
+def player_numbers(team_name)
+  game_hash
+end
+
+
+def player_stats(player_name)
+  game_hash
+end
+
+
+def big_shoe_rebounds
+  game_hash
+end
+
+
+#Bonus Questions With No Spec For Them
+
+# def most_points_scored
+# end
+
+
+# def winning_team
+# end
+
+
+# def player_with_the_longest_name
+# end
