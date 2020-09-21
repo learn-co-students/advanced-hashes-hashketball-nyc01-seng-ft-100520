@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -127,3 +128,91 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player_name)
+ #binding.pry
+ i = 0
+ while i < game_hash[:home][:players].size || i < game_hash[:away][:players].size
+  if game_hash[:home][:players][i][:player_name] == player_name
+   return game_hash[:home][:players][i][:points]
+  elsif game_hash[:away][:players][i][:player_name] == player_name
+   return game_hash[:away][:players][i][:points]
+  end
+  i += 1 
+  end
+end 
+
+def shoe_size(player_name)
+  i = 0 
+  while i < game_hash[:home][:players].size || i < game_hash[:away][:players].size 
+    if game_hash[:home][:players][i][:player_name] == player_name
+      return game_hash[:home][:players][i][:shoe]
+    elsif game_hash[:away][:players][i][:player_name] == player_name
+      return game_hash[:away][:players][i][:shoe]
+    end 
+   i += 1 
+  end 
+end 
+
+def team_colors(team_name)
+ # binding.pry 
+  if game_hash[:home][:team_name] == team_name
+    game_hash[:home][:colors]
+  elsif game_hash[:away][:team_name] == team_name
+    game_hash[:away][:colors]
+  end 
+end 
+
+def team_names
+  name_array = []
+  name_array.push(game_hash[:home][:team_name])
+  name_array.push(game_hash[:away][:team_name])
+end 
+
+def player_numbers(team_name)
+  number_array = []
+  i = 0 
+  while i < game_hash[:home][:players].size || i < game_hash[:away][:players].size 
+    if game_hash[:home][:team_name] == team_name 
+      number_array << game_hash[:home][:players][i][:number]
+    elsif game_hash[:away][:team_name] == team_name 
+      number_array << game_hash[:away][:players][i][:number]
+    end
+    i += 1 
+  end 
+  number_array.sort!
+end 
+
+def player_stats(player_name)
+  player_stats_hash = {}
+  i = 0
+  while i < game_hash[:home][:players].size || i < game_hash[:away][:players].size 
+    if game_hash[:home][:players][i][:player_name] == player_name
+      player_stats_hash = game_hash[:home][:players][i]
+    elsif game_hash[:away][:players][i][:player_name] == player_name 
+      player_stats_hash = game_hash[:away][:players][i]
+    end 
+   i += 1 
+  end 
+  player_stats_hash 
+end 
+
+def big_shoe_rebounds
+  shoe_array = []
+  i = 0 
+  while i < game_hash[:home][:players].size || i < game_hash[:away][:players].size 
+    shoe_array << game_hash[:home][:players][i][:shoe]
+    shoe_array << game_hash[:away][:players][i][:shoe]
+    shoe_array.sort!
+    i += 1 
+  end 
+  # binding.pry 
+    j = 0 
+    while  j < game_hash[:home][:players].size || j < game_hash[:away][:players].size 
+      if shoe_array[shoe_array.length - 1] == game_hash[:home][:players][j][:shoe]
+        return game_hash[:home][:players][j][:rebounds]
+      elsif shoe_array[shoe_array.length - 1] == game_hash[:away][:players][j][:shoe]
+       return game_hash[:away][:players][j][:rebounds]
+      end
+      j += 1 
+    end 
+end 
