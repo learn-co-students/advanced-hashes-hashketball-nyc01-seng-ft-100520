@@ -171,7 +171,15 @@ end
 
 
 def player_numbers(team_name)
-  game_hash
+  numbers = []
+  game_hash.each do |home_or_away, team_hash|
+    team_hash[:players].each do |player_index|
+      if team_hash[:team_name] == team_name
+        numbers << player_index[:number]
+      end
+    end
+  end
+  numbers
 end
 
 
