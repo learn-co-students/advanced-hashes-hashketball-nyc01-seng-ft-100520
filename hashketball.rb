@@ -1,3 +1,4 @@
+require 'pry'
 # Write your code below game_hash
 def game_hash
   {
@@ -126,4 +127,114 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name)
+  game_hash.each do |outer_key, outer_value|
+    outer_value.each do |inner_key, inner_value|
+      if inner_key == :players
+        inner_value.each do |inner_array|
+          if player_name == inner_array[:player_name]
+            return inner_array[:points]
+          end
+        end
+      end
+    end
+  end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |outer_key, outer_value|
+    outer_value.each do |inner_key, inner_value|
+      if inner_key == :players
+        inner_value.each do |inner_array|
+          if player_name == inner_array[:player_name]
+            return inner_array[:shoe]
+          end
+        end
+      end
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |outer_key, outer_value|
+    if outer_value[:team_name] == team_name
+      return outer_value[:colors]
+    end
+  end
+end
+
+def team_names
+  game_hash.each_with_object([]) do |(outer_key, outer_value), team_names|
+    team_names << outer_value[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  numbers = []
+  game_hash.each do |outer_key, outer_value|
+    if outer_value[:team_name] == team_name
+      outer_value.each do |inner_key, inner_value|
+        if inner_key == :players
+          inner_value.each do |inner_array|
+            numbers << inner_array[:number]
+          end
+        end
+      end
+    end
+  end
+  numbers
+end
+
+def player_stats(player_name)
+  game_hash.each do |outer_key, outer_value|
+    outer_value.each do |inner_key, inner_value|
+      if inner_key == :players
+        inner_value.each do |inner_array|
+          if player_name == inner_array[:player_name]
+            return inner_array
+          end
+        end
+      end
+    end
+  end
+end
+
+def rebounds_scored(player_name)
+  game_hash.each do |outer_key, outer_value|
+    outer_value.each do |inner_key, inner_value|
+      if inner_key == :players
+        inner_value.each do |inner_array|
+          if player_name == inner_array[:player_name]
+            return inner_array[:rebounds]
+          end
+        end
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  biggest_shoe = 0
+  player_to_return = ""
+  game_hash.each do |outer_key, outer_value|
+    outer_value.each do |inner_key, inner_value|
+      if inner_key == :players
+        inner_value.each do |inner_array|
+          if shoe_size(inner_array[:player_name]) > biggest_shoe
+            biggest_shoe = shoe_size(inner_array[:player_name])
+            player_to_return = inner_array[:player_name]
+          end
+        end
+      end
+    end
+  end
+  rebounds_scored(player_to_return)
+end
+
+
+
+
+
+
+
+
