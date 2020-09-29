@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -127,3 +128,124 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(player_name)
+  game_hash.each do |location, team_data|
+    team_data.each do |team_stat, stat_data|
+     if stat_data.class == Array
+        stat_data.each do |inner_team_stat|
+          if inner_team_stat.class == Hash
+            inner_team_stat.detect do |stat_key, stat_value|
+              if inner_team_stat[:player_name] == player_name
+                 return inner_team_stat[:points]
+               #binding.pry
+              end
+            end
+          end
+       end
+      end
+    end
+  end
+end
+
+def shoe_size(player_name)
+  game_hash.each do |location, team_data|
+    team_data.each do |team_stat, stat_data|
+     if stat_data.class == Array
+        stat_data.each do |inner_team_stat|
+          if inner_team_stat.class == Hash
+            inner_team_stat.detect do |stat_key, stat_value|
+              if inner_team_stat[:player_name] == player_name
+                 return inner_team_stat[:shoe]
+               #binding.pry
+              end
+            end
+          end
+       end
+      end
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name
+      return team_data[:colors]
+    end
+  end
+end
+
+def team_names
+  team_array = []
+  game_hash.each do |locatino, team_data|
+    team_array << team_data[:team_name]
+  end
+  team_array
+end
+
+def player_numbers(team_name)
+  numbers_array = []
+  game_hash.each do |location, team_data|
+    if team_data[:team_name] == team_name
+    team_data.each do |team_stat, stat_data|
+     if stat_data.class == Array
+        stat_data.each do |inner_team_stat|
+          if inner_team_stat.class == Hash
+            inner_team_stat.detect do |stat_key, stat_value|
+              numbers_array << inner_team_stat[:number]
+              #if inner_team_stat[:player_name] == player_name
+              #   return inner_team_stat[:points]
+               #binding.pry
+              end
+            end
+          end
+       end
+      end
+    end
+  end
+  numbers_array
+end
+
+def player_stats(player_name)
+  game_hash.each do |location, team_data|
+    team_data.each do |team_stat, stat_data|
+     if stat_data.class == Array
+        stat_data.each do |inner_team_stat|
+          if inner_team_stat.class == Hash
+            inner_team_stat.detect do |stat_key, stat_value|
+              if inner_team_stat[:player_name] == player_name
+                 return inner_team_stat
+               binding.pry
+              end
+            end
+          end
+       end
+      end
+    end
+  end
+end
+
+def big_shoe_rebounds
+  shoe = 0
+  rebounds = 0
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player|
+      #binding.pry
+      if player[:shoe] > shoe
+         shoe = player[:shoe]
+         rebounds = player[:rebounds]
+     #if stat_data.class == Array
+      #  stat_data.each do |inner_team_stat|
+      #    if inner_team_stat.class == Hash
+      #       inner_team_stat.each do |stat_key, stat_value|
+      #        shoe_array << inner_team_stat[:shoe]
+              #if inner_team_stat[:shoe] == shoe_array.max
+              #end
+              #return inner_team_stat[:rebounds]
+      #      end
+      #    end
+       #end
+      end
+    end
+  end
+  rebounds
+end
