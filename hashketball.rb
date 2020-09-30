@@ -127,3 +127,94 @@ def game_hash
 end
 
 # Write code here
+
+def num_points_scored(name)
+  all = game_hash
+  all.each do |homeaway, info|
+    info[:players].each do |stats|
+      if stats.has_value?(name)
+        return stats[:points]
+      end
+    end
+  end
+  
+end
+
+def shoe_size(name)
+  all = game_hash
+  all.each do |homeaway, info|
+    info[:players].each do |stats|
+      if stats.has_value?(name)
+        return stats[:shoe]
+      end
+    end
+  end
+  
+end
+
+def team_colors(name)
+  all = game_hash
+  all.each do |homeaway, info|
+    if info.has_value?(name)
+      return all[homeaway][:colors]
+    end
+  end
+  
+end
+
+def team_names
+  [game_hash[:home][:team_name],game_hash[:away][:team_name] ]
+end
+
+def player_numbers(name)
+  numbers = []
+  all = game_hash
+  all.each do |homeaway, info|
+    if info.has_value?(name)
+      info[:players].each do |stats|
+        numbers << stats[:number]
+      end
+    end
+  end
+  numbers
+  
+end
+
+def player_stats(name)
+  all = game_hash
+  all.each do |homeaway, info|
+    info[:players].each do |stats|
+      if stats.has_value?(name)
+        return stats
+      end
+    end
+  end
+  
+end
+
+def big_shoe_rebounds
+  biggest = 0
+  rebounds = nil
+  all = game_hash
+  all.each do |homeaway, info|
+    info[:players].each do |stats|
+      if stats[:shoe] > biggest
+        biggest = stats[:shoe]
+        rebounds = stats[:rebounds]
+      end
+    end
+  end
+  rebounds
+  
+end
+
+
+
+
+
+
+
+
+
+
+
