@@ -127,3 +127,20 @@ def game_hash
 end
 
 # Write code here
+
+# my helper
+def get_player(player_name)
+  for key, team in game_hash do
+    for player in team[:players] do
+      return player if player[:player_name] == player_name
+    end
+  end
+  return nil
+end
+
+def num_points_scored(player_name)
+  player = get_player(player_name)
+  player[:points] unless player.nil?
+end
+
+#puts most_points_scored("Alan Anderson")
