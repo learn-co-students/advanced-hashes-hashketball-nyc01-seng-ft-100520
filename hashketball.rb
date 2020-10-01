@@ -127,3 +127,37 @@ def game_hash
 end
 
 # Write code here
+
+# my helpers
+def get_team(team_name)
+  #for key, team in game_hash do
+  game_hash.each do |key,team|
+    return team if team[:team_name] == team_name
+  end
+  return nil
+end
+
+def get_player(player_name)
+  for key, team in game_hash do
+    for player in team[:players] do
+      return player if player[:player_name] == player_name
+    end
+  end
+  return nil
+end
+
+def num_points_scored(player_name)
+  player = get_player(player_name)
+  player[:points] unless player.nil?
+end
+
+def shoe_size(player_name)
+  player = get_player(player_name)
+  player[:shoe]
+end
+
+def team_colors(team_name)
+  team = get_team(team_name)
+  team[:colors] unless team.nil?
+end
+
