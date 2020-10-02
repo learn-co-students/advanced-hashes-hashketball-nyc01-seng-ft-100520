@@ -127,3 +127,85 @@ def game_hash
 end
 
 # Write code here
+
+
+def num_points_scored(name)
+  
+  game_hash[:away][:players].concat(game_hash[:home][:players]).each do |p|
+    if p[:player_name] == name 
+      return p[:points]
+    end
+  end 
+end
+
+def shoe_size(name)
+  
+  game_hash[:away][:players].concat(game_hash[:home][:players]).each do |p|
+    if p[:player_name] == name 
+      return p[:shoe]
+    end
+  end 
+end
+
+def team_by_name(name)
+  if name == "Brooklyn Nets"
+    return game_hash[:home]
+  end
+  return game_hash[:away]
+end
+
+def team_colors(name)
+  return team_by_name(name)[:colors]
+  
+end
+
+def team_names
+  return [game_hash[:home][:team_name], game_hash[:away][:team_name]]
+end
+
+def player_numbers(name)
+  result = Array.new
+  team_by_name(name)[:players].each do |p|
+      result.push(p[:number])
+  end
+  
+  return result
+end
+
+def player_stats(name)
+  
+  game_hash[:away][:players].concat(game_hash[:home][:players]).each do |p|
+    if p[:player_name] == name 
+      return p
+    end
+  end 
+end
+
+def big_shoe_rebounds()
+  pl = game_hash[:away][:players].concat(game_hash[:home][:players])
+  
+  player = nil
+  
+  pl.each do |p|
+    if player == nil || player[:shoe] < p[:shoe]
+      player = p
+    end
+  end 
+  player[:rebounds]
+end
+  
+def most_points_Scored
+  
+end
+
+def winning_team
+  
+end
+
+def player_with_longest_name
+  
+end
+
+def long_name_steals_a_ton?
+  
+end
